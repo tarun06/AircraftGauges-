@@ -1,0 +1,70 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Guages.ControLib"
+    xmlns:converter ="clr-namespace:Guages.ControLib.Converter">
+
+    <!-- Type converters-->
+    <converter:RadiusToDiameterConverter x:Key="radiusToDiameterConverter"/>
+    <converter:PointerCenterConverter x:Key="pointerCenterConverter"/>
+    <converter:DialTextPositionConverter x:Key="dialTextPositionConverter"/>
+
+    <Style TargetType="{x:Type local:Airspeed}">
+        <Setter Property="ResetPointerOnStartUp" Value="True" />
+        <Setter Property="ScaleValuePrecision" Value="5" />
+        <Setter Property="RangeIndicatorThickness" Value="5"/>
+        <Setter Property="OptimalRangeColor" Value="#339000" />
+        <Setter Property="AboveOptimalRangeColor" Value="#F4E300" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="local:Airspeed">
+                    <!-- Root Grid-->
+                    <Grid x:Name="LayoutRoot" 
+                       Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}" 
+                       Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}" >
+
+                        <Ellipse x:Name="OuterFrame" StrokeThickness="16" Stroke="#333333"
+                          Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}" 
+                          Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}" >
+                            <Ellipse.Fill>
+                                <RadialGradientBrush 
+                                      GradientOrigin="0.5,0.5" 
+                                      Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">     
+                                    <RadialGradientBrush.GradientStops>
+                                        <GradientStop Color="#333333" Offset="0.8" />
+                                        <GradientStop Color="Black" Offset="1" />
+                                    </RadialGradientBrush.GradientStops>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+
+                        <!-- Dial Text -->
+                        <TextBlock Text="{TemplateBinding DialText}"  
+                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DialTextColor}"
+                            FontSize="{TemplateBinding DialTextFontSize}" 
+                            RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DialTextOffset, Converter={StaticResource dialTextPositionConverter}}"
+                            FontWeight="Bold"/>
+
+                        <!-- Pointer -->
+                        <Path x:Name="Pointer"
+                           Width="{TemplateBinding PointerLength}" 
+                           Height="{TemplateBinding PointerThickness}" HorizontalAlignment="Center"
+                           Data="M1,1 L1,10 L156,6 z" Stretch="Fill"  RenderTransformOrigin="0,0.5" 
+                           Fill="Red"
+                           RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent},  Path=PointerLength, Converter={StaticResource pointerCenterConverter}}">
+                        </Path>
+
+
+                        <!--Pointer Cap-->
+                        <Ellipse x:Name="PointerCap" Height="{TemplateBinding PointerCapRadius}" Width="{TemplateBinding PointerCapRadius}" 
+                                 StrokeThickness="10" Opacity="1" Stroke="#1A1A1A" Fill="#333333"/>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
