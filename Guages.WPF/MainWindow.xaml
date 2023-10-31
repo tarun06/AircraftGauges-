@@ -1,0 +1,43 @@
+﻿<Window x:Class="Guages.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Guages.WPF"
+        mc:Ignorable="d"
+        xmlns:guagelib ="clr-namespace:Guages.ControLib;assembly=Guages.ControLib"
+        Title="MainWindow" Height="500" Width="500">
+    <Grid >
+        <guagelib:Airspeed 
+                 Radius="150" 
+                 ScaleRadius="112" 
+                 ScaleStartAngle="300" 
+                 ScaleSweepAngle="300"
+                 PointerLength="65" 
+                 PointerCapRadius="30" 
+                 MinValue="40" 
+                 MaxValue="240" 
+                 MajorDivisionsCount="10" 
+                 MinorDivisionsCount="4" 
+                 CurrentValue="{Binding Score}"
+                 RangeIndicatorThickness="12"
+                 RangeIndicatorRadius="110"
+                 ScaleLabelRadius="90"
+                 ScaleLabelSize="40,20"
+                 ScaleLabelFontSize="10"
+                 ScaleLabelForeground="White"
+                 OptimalRangeStartValue ="60"
+                 OptimalRangeEndValue="150"
+                 AboveOptimalRangeEndValue="200"
+                 MajorTickSize="20,5"
+                 MinorTickSize="12,2"
+                 MajorTickColor="White"
+                 MinorTickColor="White"
+                 GaugeBackgroundColor="Black"
+                 PointerThickness ="16" 
+                 DialTextOffset="-50" 
+                 DialText="Air&#x0a;speed"
+                 DialTextColor="White">
+        </guagelib:Airspeed>
+    </Grid>
+</Window>
