@@ -5,5 +5,15 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+ 
+  <ItemGroup>
+    <Content Include="assets\AirspeedHand.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpVectors" Version="1.8.2" />
+  </ItemGroup>
 
 </Project>

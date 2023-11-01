@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpVectors.Converters;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,13 +47,8 @@ namespace Guages.ControLib
         private double arcradius2;
 
         private bool isInitialValueSet = false;
-        private Path pointer;
-
-        private Ellipse pointerCap;
-
+        private SvgViewbox pointer;
         private Path rangeIndicator;
-
-        //Private variables
         private Grid rootGrid;
 
         #endregion Private variables
@@ -155,12 +151,6 @@ namespace Guages.ControLib
         /// </summary>
         public static readonly DependencyProperty OptimalRangeStartValueProperty =
            DependencyProperty.Register(nameof(OptimalRangeStartValue), typeof(double), typeof(Airspeed), new PropertyMetadata(new PropertyChangedCallback(Airspeed.OnOptimalRangeStartValuePropertyChanged)));
-
-        /// <summary>
-        /// Dependency property to Get/Set the Pointer cap Radius
-        /// </summary>
-        public static readonly DependencyProperty PointerCapRadiusProperty =
-            DependencyProperty.Register(nameof(PointerCapRadius), typeof(double), typeof(Airspeed), null);
 
         /// <summary>
         /// Dependency property to Get/Set the pointer length
@@ -536,21 +526,6 @@ namespace Guages.ControLib
         }
 
         /// <summary>
-        /// Gets/Sets the Pointer cap radius
-        /// </summary>
-        public double PointerCapRadius
-        {
-            get
-            {
-                return (double)GetValue(PointerCapRadiusProperty);
-            }
-            set
-            {
-                SetValue(PointerCapRadiusProperty, value);
-            }
-        }
-
-        /// <summary>
         /// Gets/Sets the Pointer Length
         /// </summary>
         public double PointerLength
@@ -778,17 +753,15 @@ namespace Guages.ControLib
             base.OnApplyTemplate();
             //Get reference to known elements on the control template
             rootGrid = (Grid)GetTemplateChild("LayoutRoot");
-            pointer = (Path)GetTemplateChild("Pointer");
-            pointerCap = (Ellipse)GetTemplateChild("PointerCap");
+            pointer = (SvgViewbox)GetTemplateChild("Pointer");
 
             DrawScale();
             DrawOptimalRangeIndicator();
             DrawAboveOptimalRangeIndicator();
 
-            //Set Zindex of pointer and pointer cap to a really high number so that it stays on top of the
-            //scale and the range indicator
+            ////Set Zindex of hand to a really high number so that it stays on top of the
+            ////scale and the range indicator
             Canvas.SetZIndex(pointer, 100);
-            Canvas.SetZIndex(pointerCap, 101);
 
             if (ResetPointerOnStartUp)
             {
