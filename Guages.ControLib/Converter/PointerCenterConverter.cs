@@ -22,10 +22,12 @@ namespace Guages.ControLib.Converter
             RotateTransform rt = new RotateTransform();
             TranslateTransform tt = new TranslateTransform();
 
-            tt.X = dblVal / 2;
-            tg.Children.Add(rt);
-            tg.Children.Add(tt);
-
+            if (double.TryParse(parameter?.ToString(), out double renderTransferxOrigin))
+            {
+                tt.X = (dblVal / 2) - dblVal * renderTransferxOrigin;
+                tg.Children.Add(rt);
+                tg.Children.Add(tt);
+            }
             return tg;
         }
 

@@ -7,14 +7,13 @@
         mc:Ignorable="d"
         xmlns:guagelib ="clr-namespace:Guages.ControLib;assembly=Guages.ControLib"
         Title="MainWindow" Height="500" Width="500">
-    <Grid >
+    <StackPanel >
         <guagelib:Airspeed 
                  Radius="150" 
                  ScaleRadius="112" 
                  ScaleStartAngle="300" 
                  ScaleSweepAngle="300"
-                 PointerLength="65" 
-                 PointerCapRadius="30" 
+                 PointerLength="120" 
                  MinValue="40" 
                  MaxValue="240" 
                  MajorDivisionsCount="10" 
@@ -34,10 +33,10 @@
                  MajorTickColor="White"
                  MinorTickColor="White"
                  GaugeBackgroundColor="Black"
-                 PointerThickness ="16" 
+                 PointerThickness ="20" 
                  DialTextOffset="-50" 
                  DialText="Air&#x0a;speed"
                  DialTextColor="White">
         </guagelib:Airspeed>
-    </Grid>
+    </StackPanel>
 </Window>
