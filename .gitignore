@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Guages.ControLib/bin/Debug/net6.0-windows
+/Guages.ControLib/obj
+/Guages.WPF/.vs
+/Guages.WPF/bin/Debug/net6.0-windows
+/Guages.WPF/obj
