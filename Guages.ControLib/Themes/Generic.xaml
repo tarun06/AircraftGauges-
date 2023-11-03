@@ -59,4 +59,41 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:Compass}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Compass}">
+                    <Grid x:Name="LayoutRoot"
+                         Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}"
+                         Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}">
+
+
+                        <svgc:SvgViewbox  x:Name="Pointer"
+                               Width="{TemplateBinding PointerLength}"
+                               Height="{TemplateBinding PointerThickness}" HorizontalAlignment="Center"
+                               Source="/assets/Airplane.svg"
+                               RenderTransformOrigin="0.5,0.5"
+                               RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerLength, Converter={StaticResource pointerCenterConverter}, ConverterParameter=0.5}" />
+
+                        
+                        <Ellipse x:Name="OuterFrame" StrokeThickness="16" Stroke="#333333"
+                             Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}"
+                             Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius, Converter={StaticResource radiusToDiameterConverter}}">  
+                            <Ellipse.Fill>
+                                <RadialGradientBrush
+                                     GradientOrigin="0.5,0.5"
+                                     Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">  
+                                    <RadialGradientBrush.GradientStops>
+                                        <GradientStop Color="#333333" Offset="0.8" />
+                                        <GradientStop Color="Black" Offset="1" />
+                                    </RadialGradientBrush.GradientStops>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
